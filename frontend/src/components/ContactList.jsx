@@ -5,10 +5,13 @@ const ContactList = ({ contacts, onContactDeleted, isLoading }) => {
     if (!window.confirm(`Are you sure you want to delete ${name}?`)) return;
 
     try {
-      await axios.delete(`http://localhost:5050/api/contacts/${id}`);
+      await axios.delete(
+        `${import.meta.env.VITE_BACKEND_URL}/api/contacts/${id}`
+      );
       onContactDeleted();
       alert("Contact deleted successfully!");
     } catch (error) {
+      console.error("Failed to delete contact:", error);
       alert("Failed to delete contact");
     }
   };

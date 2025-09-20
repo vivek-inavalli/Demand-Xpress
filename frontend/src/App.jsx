@@ -14,7 +14,7 @@ function App() {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:5050/api/contacts?page=${page}&limit=10`
+        `${import.meta.env.VITE_BACKEND_URL}/api/contacts?page=${page}&limit=10`
       );
       setContacts(response.data.contacts);
       setPagination(response.data.pagination);
@@ -32,7 +32,7 @@ function App() {
   }, []);
 
   const handleContactAdded = () => {
-    fetchContacts(1); // Go back to first page when new contact is added
+    fetchContacts(1);
   };
 
   const handleContactDeleted = () => {

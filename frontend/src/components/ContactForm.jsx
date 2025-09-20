@@ -58,12 +58,16 @@ const ContactForm = ({ onContactAdded }) => {
 
     setIsLoading(true);
     try {
-      await axios.post("http://localhost:5050/api/contacts", formData);
+      await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/contacts`,
+        formData
+      );
       setFormData({ name: "", email: "", phone: "" });
       setErrors({});
       onContactAdded();
       alert("Contact added successfully!");
     } catch (error) {
+      console.error("Failed to add contact:", error);
       if (error.response?.data?.message) {
         alert(error.response.data.message);
       } else {
